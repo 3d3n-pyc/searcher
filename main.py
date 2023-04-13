@@ -3,16 +3,20 @@ import time
 import os
 
 import modules.title as title
-import modules.watermark
 
 title.start()
 
+import modules.watermark
+
 def search(name):
+    if name == '':
+        print(f"    {pystyle.Colors.light_red}Votre recherche est vide\n")
+        return
+    
     files = os.listdir("data")
 
     total_lines = 0
     lines = 0
-    message = ''
     output = ''
 
     for i in range(len(files)):
@@ -29,8 +33,9 @@ def search(name):
                 print(f'    {pystyle.Colors.light_blue}{str(files[i])} ({lines})\n{str(output)}')
         lines = 0
         output = ''
-
-    return message
+        
+    if total_lines == 0:
+        print(f"    {pystyle.Colors.orange}Aucun résultat trouvé\n")
 
 while True:
-    print(search(input(f'  {pystyle.Colors.dark_green}Recherche : {pystyle.Colors.light_green}')))
+    search(input(f'  {pystyle.Colors.dark_green}Recherche : {pystyle.Colors.light_green}'))
