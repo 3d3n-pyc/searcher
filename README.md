@@ -24,5 +24,6 @@ Le programme vous demandera le mot-clé que vous souhaitez rechercher. Entrez le
 
 Le programme affichera les fichiers contenant le mot-clé ainsi que les lignes correspondantes. Les résultats de la recherche seront affichés dans la console.
 
-Licence
+## Licence
+
 Ce programme est sous licence MIT. Veuillez consulter le fichier `LICENSE` pour plus d'informations.
