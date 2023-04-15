@@ -1,6 +1,6 @@
 # Programme Python : Readme
 
-Ce programme permet de rechercher des mots-clés dans tous les fichiers d'un répertoire et d'afficher les lignes correspondantes dans la console. Il utilise la librairie `pystyle` pour afficher des messages colorés dans la console.
+Le programme lit les fichiers à rechercher dans le répertoire `data` et ses sous-dossiers. Vous devez placer les fichiers à rechercher dans ce répertoire (et ses sous-dossiers) avant d'exécuter le programme. Il utilise la librairie `pystyle` pour afficher des messages colorés dans la console.
 
 ## Installation du module `pystyle`
 
@@ -24,6 +24,5 @@ Le programme vous demandera le mot-clé que vous souhaitez rechercher. Entrez le
 
 Le programme affichera les fichiers contenant le mot-clé ainsi que les lignes correspondantes. Les résultats de la recherche seront affichés dans la console.
 
-## Licence
-
+Licence
 Ce programme est sous licence MIT. Veuillez consulter le fichier `LICENSE` pour plus d'informations.
