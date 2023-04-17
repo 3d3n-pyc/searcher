@@ -32,4 +32,4 @@ def start():
 
 def stop():
     stop = True
-    pystyle.System.Title(f'IP Search  -  By LocheMan')
+    pystyle.System.Title(f'Searcher  -  By LocheMan')
