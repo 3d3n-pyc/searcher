@@ -18,10 +18,10 @@ def locheman():
             if not stop:
                 number += 1
                 if title == 'LocheMan' or title == 'LocheMan...':
-                    pystyle.System.Title(f'IP Search  -  By {title}')
+                    pystyle.System.Title(f'Searcher  -  By {title}')
                     time.sleep(0.5)
                 else:
-                    pystyle.System.Title(f'IP Search  -  By {title}')
+                    pystyle.System.Title(f'Searcher  -  By {title}')
                     time.sleep(0.1)
             else:
                 pass
