@@ -1,63 +1,113 @@
-import pystyle
-import time
 import os
+import argparse
+import sys
+import time
 
-import modules.title as title
 
-title.start()
+class color:
+    white = '\033[38;2;255;255;255m'
+    dark_gray = '\033[38;2;100;100;100m'
+    gray = '\033[38;2;150;150;150m'
+    red = '\033[38;2;255;0;0m'
+    orange = '\033[38;2;255;150;0m'
+    turquoise = '\033[38;2;0;150;255m'
+    cyan = '\033[38;2;0;255;255m'
 
-import modules.watermark
+def listFiles(path:str) -> list:
+    filePaths = []
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            filePaths.append(path + os.path.relpath(os.path.join(root, file), start=path))
+    return filePaths
 
-def search(name):
-    if name == '':
-        print(f"    {pystyle.Colors.light_red}Votre recherche est vide\n")
-        return
-    
-    files = os.listdir("data")
-
-    total_lines = 0
-    lines = 0
+def search(value:str, path:str, lower:bool) -> str:
     output = ''
+    value = value.lower() if lower else value
+    
+    for i, line in enumerate(open(path, 'r', encoding='latin-1').readlines()):
+        if value in (line.lower() if lower else line):
+            i += 1
+            espaces = ' ' * (7 - len(str(i)))
+            output += f'  {color.turquoise}{i}{espaces}{color.cyan}{line}'
+    
+    return output if output else None
 
-    for i in range(len(files)):
-        if os.path.isdir(os.path.join('data', files[i])):
-            print(f'    {pystyle.Colors.StaticRGB(50, 50, 255)}{str(files[i])}')
-            files_dir = os.listdir(f'data/{files[i]}')
-            for i2 in range(len(files_dir)):
-                with open(f'data/{files[i]}/{files_dir[i2]}', encoding='latin-1') as f:
-                    file = open(f'data/{files[i]}/{files_dir[i2]}')
-                    for line in f:
-                        if name in line:
-                            total_lines += 1
-                            lines += 1
 
-                            espaces = ' ' * (6 - len(str(lines)))
-                            output += f'     {pystyle.Colors.turquoise}{lines}{espaces}{pystyle.Colors.cyan}{line}'
-                    if output != '':
-                        print(f'     {pystyle.Colors.light_blue}{str(files_dir[i2])} ({lines})\n{str(output)}')
-                lines = 0
-                output = ''
-            
-            if len(files) == 0:
-                print()
+parser = argparse.ArgumentParser(
+    prog='searcher',
+    description='Search in all files of directory',
+    epilog="Script by '@3d3n.pyc'. (https://github.com/LocheMan)"
+)
 
-        else:
-            with open(f'data/{files[i]}', encoding='latin-1') as f:
-                file = open(f'data/{files[i]}')
-                for line in f:
-                    if name in line:
-                        total_lines += 1
-                        lines += 1
+parser.add_argument('value',
+                    help='value to search')
 
-                        espaces = ' ' * (6 - len(str(lines)))
-                        output += f'    {pystyle.Colors.turquoise}{lines}{espaces}{pystyle.Colors.cyan}{line}'
-                if output != '':
-                    print(f'    {pystyle.Colors.light_blue}{str(files[i])} ({lines})\n{str(output)}')
-            lines = 0
-            output = ''
-        
-    if total_lines == 0:
-        print(f"    {pystyle.Colors.orange}Aucun résultat trouvé\n")
+parser.add_argument('-l', '--lower', action='store_true',
+                    help='lower value')
 
-while True:
-    search(input(f'  {pystyle.Colors.dark_green}Recherche : {pystyle.Colors.light_green}'))
+parser.add_argument('-t', '--time', action='store_true',
+                    help='show time of search')
+
+parser.add_argument('-p', '--path', type=str,
+                    help='specify the path')
+
+args:argparse.Namespace = parser.parse_args()
+
+os.system('title Search in progress...')
+
+
+value = args.value
+
+lower = args.lower
+timeArg = args.time
+pathArg = args.path
+
+
+if pathArg and not os.path.exists(pathArg):
+    print(color.red + 'Path is invalid')
+    print(color.white, end='')
+    sys.exit()
+
+if pathArg in ['', None]:
+    pathArg = '.\\'
+    
+if pathArg:
+    pathArg = pathArg.replace('/', '\\')
+
+if not pathArg.endswith('\\'):
+    pathArg += '\\'
+
+
+if value == "":
+    print(color.red + 'Value is empty.\n')
+    print(color.white, end='')
+    sys.exit()
+
+found = False
+
+if timeArg:
+    start = time.time()
+
+
+files = listFiles(pathArg)
+
+for file in files:
+    result = search(value, file, lower)
+    
+    if result != None:
+        found = True
+        print('\033[38;2;40;70;200m' + file)
+        print(result)
+
+if timeArg:
+    end = time.time()
+    timeTaken = round(end-start, 3)
+
+if not found:
+    print(color.orange + 'Value not found.\n')
+
+
+if timeArg:
+    print(f'{color.dark_gray}Time taken by search : {color.gray}{timeTaken}{color.dark_gray}s')
+
+print(color.white, end='')
