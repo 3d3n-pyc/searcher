@@ -5,7 +5,7 @@ Ce projet est un script Python permettant de rechercher du texte dans tous les f
 ## Installation
 
 1. Télécharger le répertoire.
-2. Décompressier le répertoire.
+2. Décompresser le répertoire.
 3. Ouvrir un cmd et naviguer jusqu'au chemin du répertoire : `cd chemin`.
 4. Utiliser le script.
 
