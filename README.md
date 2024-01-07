@@ -14,13 +14,13 @@ Ce projet est un script Python permettant de rechercher du texte dans tous les f
 Pour utiliser le script, exécutez la commande suivante :
 
 ```bash
-python searcher.py [options] value
+python main.py [options] value
 ```
 
 Si vous souhaitez de l'aide, exécutez la commande suivante :
 
 ```bash
-python searcher.py -h
+python main.py -h
 ```
 
 ## Compilation (optionel)
