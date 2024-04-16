@@ -36,7 +36,7 @@ def search(value:str, path:str, lower:bool) -> str:
 parser = argparse.ArgumentParser(
     prog='searcher',
     description='Search in all files of directory',
-    epilog="Script by '@3d3n.pyc'. (https://github.com/LocheMan)"
+    epilog="Script by '@3d3n.pyc'. (https://github.com/3d3n-pyc)"
 )
 
 parser.add_argument('value',
