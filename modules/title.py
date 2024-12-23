@@ -2,9 +2,9 @@ import threading
 import pystyle
 import time
 
-LocheMan = ['...', 'L...' ,'Lo...' ,'Loc...' ,'Loch...' ,'Loche...' ,'LocheM...' ,'LocheMa...',         \
-            'LocheMan' ,'LocheMan...' ,'LocheMan' ,'LocheMan...' ,'LocheMan' ,'LocheMan...' ,'LocheMan' \
-            ,'LocheMa' ,'LocheM' ,'Loche' ,'Loch' ,'Loc' ,'Lo' ,'L']
+LocheMan = ['...', '3...' ,'3D...' ,'3D3...',         \
+            '3D3N' ,'3D3N...' ,'3D3N' ,'3D3N...' ,'3D3N' ,'3D3N...' ,'3D3N' \
+            ,'3D3' ,'3D' ,'3']
 
 def locheman():
     global stop
@@ -17,7 +17,7 @@ def locheman():
         for title in LocheMan:
             if not stop:
                 number += 1
-                if title == 'LocheMan' or title == 'LocheMan...':
+                if title == '3D3N' or title == '3D3N...':
                     pystyle.System.Title(f'Searcher  -  By {title}')
                     time.sleep(0.5)
                 else:
@@ -32,4 +32,4 @@ def start():
 
 def stop():
     stop = True
-    pystyle.System.Title(f'Searcher  -  By LocheMan')
+    pystyle.System.Title(f'Searcher  -  By 3D3N')
